@@ -1,137 +1,118 @@
-# Scripting 2026
+# Nebula
+Proyecto académico desarrollado para la materia **Scripting – Ingeniería en Diseño de Entretenimiento Digital (UPB)**.
 
-## Español
+Nebula es un videojuego de plataformas 2D desarrollado en **Unity** utilizando el framework **Corgi Engine**.
 
-### Instrucciones de Instalación y Configuración
-
-Este proyecto está desarrollado con Unity y utiliza el Corgi Engine. Sigue estos pasos para configurar el proyecto en tu computadora:
-
-#### Prerrequisitos
-- **Unity Hub**: Descarga desde [unity.com](https://unity.com/download)
-- **Unity 2022.3 LTS** (o la versión específica del proyecto)
-- **Git**: Descarga desde [git-scm.com](https://git-scm.com/downloads)
-- **Visual Studio Community** o **Visual Studio Code** para editar scripts
-
-#### Pasos de Instalación
-
-1. **Crear tu repositorio**
-   ```bash
-   # Navega a tu carpeta de proyectos
-   cd tu-carpeta-de-proyectos
-   
-   # Clona este repositorio
-   git clone https://github.com/xaca/scripting2026.git
-   
-   # Cambia el nombre de la carpeta si lo deseas
-   mv scripting2026 tu-nuevo-nombre-proyecto
-   cd tu-nuevo-nombre-proyecto
-   
-   # Opcional: Crea tu propio repositorio en GitHub
-   # Elimina la conexión al repositorio original
-   rm -rf .git
-   
-   # Inicializa tu nuevo repositorio
-   git init
-   git add .
-   git commit -m "Primer commit: proyecto base"
-   
-   # Conecta con tu repositorio de GitHub (reemplaza con tu URL)
-   git remote add origin https://github.com/tu-usuario/tu-repositorio.git
-   git push -u origin main
-   ```
-
-2. **Abrir el proyecto en Unity**
-   - Abre Unity Hub
-   - Haz clic en "Open" o "Abrir"
-   - Navega hasta la carpeta del proyecto clonado
-   - Selecciona la carpeta raíz del proyecto
-   - Unity detectará automáticamente el proyecto
-
-3. **Verificar la instalación**
-   - Espera a que Unity importe todos los assets
-   - Abre la escena principal en `Assets/Juego/` o `Assets/CorgiEngine/`
-   - Presiona el botón Play para verificar que todo funciona
-
-#### Estructura del Proyecto
-- `Assets/CorgiEngine/`: Archivos del motor Corgi Engine
-- `Assets/Juego/`: Tus scripts y assets personalizados
-- `Assets/MMData/`: Datos y configuraciones
-- `ProjectSettings/`: Configuración del proyecto Unity
-
-#### Solución de Problemas Comunes
-- **Error de versión de Unity**: Asegúrate de usar Unity 2022.3 LTS
-- **Assets faltantes**: Verifica que todos los archivos se descargaron correctamente
-- **Errores de compilación**: Espera a que Unity termine de importar todos los packages
+El jugador controla a **Darius Holt**, un recolector enviado a explorar una estación minera abandonada en **Titán**, luna de Saturno. Durante la exploración descubrirá anomalías energéticas, enemigos hostiles y restos de una operación minera fallida.
 
 ---
 
-## English
+# Tecnologías Utilizadas
 
-### Installation and Setup Instructions
+- Unity Engine 2022.3 LTS
+- C#
+- Corgi Engine Framework
+- Git / GitHub
+- Visual Studio / Visual Studio Code
 
-This project is developed with Unity and uses the Corgi Engine. Follow these steps to set up the project on your computer:
+---
 
-#### Prerequisites
-- **Unity Hub**: Download from [unity.com](https://unity.com/download)
-- **Unity 2022.3 LTS** (or the specific version required by the project)
-- **Git**: Download from [git-scm.com](https://git-scm.com/downloads)
-- **Visual Studio Community** or **Visual Studio Code** for script editing
+# Integrantes del Proyecto
 
-#### Installation Steps
+- Stella Perez
+- Juan Camilo Tique
 
-1. **Create your repository**
-   ```bash
-   # Navigate to your projects folder
-   cd your-projects-folder
-   
-   # Clone this repository
-   git clone https://github.com/xaca/scripting2026.git
-   
-   # Rename the folder if desired
-   mv scripting2026 your-new-project-name
-   cd your-new-project-name
-   
-   # Optional: Create your own repository on GitHub
-   # Remove connection to original repository
-   rm -rf .git
-   
-   # Initialize your new repository
-   git init
-   git add .
-   git commit -m "First commit: base project"
-   
-   # Connect to your GitHub repository (replace with your URL)
-   git remote add origin https://github.com/your-username/your-repository.git
-   git push -u origin main
-   ```
+---
 
-2. **Open the project in Unity**
-   - Open Unity Hub
-   - Click "Open"
-   - Navigate to the cloned project folder
-   - Select the project root folder
-   - Unity will automatically detect the project
+# Entrega 2 – Desarrollo del Proyecto
 
-3. **Verify installation**
-   - Wait for Unity to import all assets
-   - Open the main scene in `Assets/Juego/` or `Assets/CorgiEngine/`
-   - Press the Play button to verify everything works
+Para esta entrega se implementaron nuevas funcionalidades y mejoras visuales dentro del juego.
 
-#### Project Structure
-- `Assets/CorgiEngine/`: Corgi Engine files
-- `Assets/Juego/`: Your custom scripts and assets
-- `Assets/MMData/`: Data and configurations
-- `ProjectSettings/`: Unity project settings
+## Diseño del Nivel 2
 
-#### Common Troubleshooting
-- **Unity version error**: Make sure you're using Unity 2022.3 LTS
-- **Missing assets**: Verify all files downloaded correctly
-- **Compilation errors**: Wait for Unity to finish importing all packages
+Se realizó el diseño manual del segundo nivel teniendo en cuenta:
 
+- progresión de dificultad
+- distribución de plataformas
+- posicionamiento de enemigos
+- ubicación estratégica de monedas
+
+Posteriormente el nivel fue implementado en Unity utilizando **Tilemaps y plataformas del Corgi Engine**.
+
+---
+
+## Personalización Gráfica
+
+Se diseñaron nuevos elementos visuales para el nivel 2:
+
+### Fondo
+
+El fondo representa una zona interna deteriorada de la estación minera, que corresponde en su mayoría a la oscuridad de la cueva.
+
+---
+
+### Plataformas
+
+Las plataformas fueron diseñadas con una estética industrial para mantener coherencia con el entorno:
+
+---
+
+## Sistema de Monedas
+
+Se diseñaron monedas recolectables que representan **fragmentos de energía cristalizada provenientes de los reactores de la estación minera**.
+
+---
+
+## Sistema de Portales
+
+Se implementaron **portales de transición de nivel** que permiten al jugador avanzar dentro de la estación minera.
+
+Los portales funcionan como puntos de conexión entre áreas del juego.
+
+---
+
+## Pantalla Game Over
+
+Se implementó una pantalla de **Game Over** que se activa cuando el jugador pierde todas sus vidas.
+
+Opciones disponibles:
+
+- reiniciar el nivel
+- volver al menú principal
+
+---
+
+## Diagramas del Sistema
+
+Se realizaron diagramas de clases para representar la estructura del sistema del juego.
+
+
+---
+
+# Instalación y Configuración
+
+Este proyecto está desarrollado con **Unity** y utiliza el framework **Corgi Engine**.
+
+## Prerrequisitos
+
+- Unity Hub  
+- Unity **2022.3 LTS**
+- Git
+- Visual Studio Community o Visual Studio Code
+
+---
+
+## Clonar el Repositorio
+
+```bash
+cd tu-carpeta-de-proyectos
+git clone https://github.com/xaca/scripting2026.git
+cd scripting2026
+
+```
 ---
 
 ## Recursos Adicionales / Additional Resources
-
-- [Unity Documentation](https://docs.unity3d.com/)
-- [Corgi Engine Documentation](https://corgi-engine-docs.moremountains.com/)
-- [Git Tutorial](https://git-scm.com/docs/gittutorial)
+Unity Documentation
+Corgi Engine Documentation
+Git Tutorial
