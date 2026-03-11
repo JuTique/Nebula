@@ -23,6 +23,11 @@ El jugador controla a **Darius Holt**, un recolector enviado a explorar una esta
 - Juan Camilo Tique
 
 ---
+## UML Class Diagram
+
+![UML Diagram](UMLDiagram-Nebula.drawio.png)
+
+---
 
 # Entrega 2 – Desarrollo del Proyecto
 
