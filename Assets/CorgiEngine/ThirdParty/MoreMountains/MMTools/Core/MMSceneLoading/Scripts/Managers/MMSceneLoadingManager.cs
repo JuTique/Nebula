@@ -82,10 +82,17 @@ namespace MoreMountains.Tools
 		{
 			_sceneToLoad = sceneToLoad;					
 			Application.backgroundLoadingPriority = ThreadPriority.High;
-			if (LoadingScreenSceneName!=null)
+			// If a loading screen scene is configured and available in the build, use it.
+			// Otherwise, fall back to loading the target scene directly to avoid errors
+			// when the loading scene isn't part of the active build settings.
+			if (!string.IsNullOrEmpty(LoadingScreenSceneName) && Application.CanStreamedLevelBeLoaded(LoadingScreenSceneName))
 			{
 				LoadingSceneEvent.Trigger(sceneToLoad, LoadingStatus.LoadStarted);
 				SceneManager.LoadScene(LoadingScreenSceneName);
+			}
+			else
+			{
+				SceneManager.LoadScene(sceneToLoad);
 			}
 		}
 
@@ -97,7 +104,15 @@ namespace MoreMountains.Tools
 		{
 			_sceneToLoad = sceneToLoad;					
 			Application.backgroundLoadingPriority = ThreadPriority.High;
-			SceneManager.LoadScene(loadingSceneName);
+			if (!string.IsNullOrEmpty(loadingSceneName) && Application.CanStreamedLevelBeLoaded(loadingSceneName))
+			{
+				SceneManager.LoadScene(loadingSceneName);
+			}
+			else
+			{
+				// fallback: load the destination scene directly
+				SceneManager.LoadScene(sceneToLoad);
+			}
 		}
 
 		/// <summary>
