@@ -237,6 +237,9 @@ EditorBuildSettings:
     path: Assets/Proyecto/Scenes/Nivel2.unity
     guid: 2b27c60da365e984c914dcdc24a2d912
   - enabled: 1
+    path: Assets/Proyecto/Scenes/Nivel3.unity
+    guid: 8598675cf064dd34d80542a5624ded8f
+  - enabled: 1
     path: Assets/Proyecto/Scenes/Perdio.unity
     guid: 6be792be44e567a41b531c8e9768a6a5
   - enabled: 1
@@ -245,5 +248,8 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/CorgiEngine/ThirdParty/MoreMountains/MMTools/Core/MMSceneLoading/LoadingScreens/LoadingScreen.unity
     guid: 888394d52616e5e42b3b54c3f2bbd3eb
+  - enabled: 1
+    path: Assets/Proyecto/Scenes/Logros.unity
+    guid: 690501aaea74d68468914cb562c23026
   m_configObjects: {}
   m_UseUCBPForAssetBundles: 0
