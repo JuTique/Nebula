@@ -3,6 +3,8 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
+namespace Proyecto.Achievements
+{
 public class AchievementItemView : MonoBehaviour
 {
     [SerializeField] private UnityEngine.UI.Image icon;
@@ -12,6 +14,11 @@ public class AchievementItemView : MonoBehaviour
 
     public void Bind(MMAchievement achievement)
     {
+        if (achievement == null)
+        {
+            return;
+        }
+
         bool unlocked = achievement.UnlockedStatus;
 
        
@@ -38,4 +45,5 @@ public class AchievementItemView : MonoBehaviour
             lockedOverlay.SetActive(!unlocked);
         }
     }
+}
 }

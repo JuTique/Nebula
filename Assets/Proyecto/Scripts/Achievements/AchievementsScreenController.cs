@@ -34,6 +34,11 @@ namespace Proyecto.Achievements
             }
         }
 
+        protected virtual void OnDisable()
+        {
+            CancelInvoke(nameof(Refresh));
+        }
+
         /// <summary>
         /// Clears and (re)populates the UI from the manager list
         /// </summary>
@@ -54,7 +59,17 @@ namespace Proyecto.Achievements
                 for (int i = 0; i < children.Length && i < list.Count; i++)
                 {
                     children[i].Bind(list[i]);
-                    _spawnedItems.Add(children[i]);
+                }
+                return;
+            }
+
+            // fallback: if prefab reference is missing, try binding existing children
+            if (ItemPrefab == null && ContentRoot != null)
+            {
+                AchievementItemView[] children = ContentRoot.GetComponentsInChildren<AchievementItemView>(true);
+                for (int i = 0; i < children.Length && i < list.Count; i++)
+                {
+                    children[i].Bind(list[i]);
                 }
                 return;
             }

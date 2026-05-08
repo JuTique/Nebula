@@ -85,7 +85,7 @@ namespace MoreMountains.Tools
 			if (LoadingScreenSceneName!=null)
 			{
 				LoadingSceneEvent.Trigger(sceneToLoad, LoadingStatus.LoadStarted);
-				SceneManager.LoadScene(LoadingScreenSceneName);
+				SceneManager.LoadScene("Nivel1");
 			}
 		}
 

@@ -18,11 +18,13 @@ MonoBehaviour:
     AchievementType: 0
     HiddenAchievement: 0
     UnlockedStatus: 0
-    Title: a
+    Title: "Atrapado en Tit\xE1n"
     Description: Empieza tu aventura
     Points: 0
-    LockedImage: {fileID: 0}
-    UnlockedImage: {fileID: 0}
+    LockedImage: {fileID: 7085217445589072389, guid: 053a937f4ab7a9044bd955475aec21b6,
+      type: 3}
+    UnlockedImage: {fileID: 6704481180982578400, guid: accea8bb7b3db6c418236149901acf4d,
+      type: 3}
     UnlockedSound: {fileID: 0}
     ProgressTarget: 0
     ProgressCurrent: 0
@@ -33,8 +35,10 @@ MonoBehaviour:
     Title: "Energ\xEDa recuperada"
     Description: "Obt\xE9n tu primer llave de zona"
     Points: 0
-    LockedImage: {fileID: 0}
-    UnlockedImage: {fileID: 0}
+    LockedImage: {fileID: 7085217445589072389, guid: 053a937f4ab7a9044bd955475aec21b6,
+      type: 3}
+    UnlockedImage: {fileID: -971658879362419245, guid: a962690388234ca4ba52974264cadd4a,
+      type: 3}
     UnlockedSound: {fileID: 0}
     ProgressTarget: 0
     ProgressCurrent: 0
@@ -45,8 +49,10 @@ MonoBehaviour:
     Title: "Atrapado en Tit\xE1n"
     Description: Derrota 10 enemigos
     Points: 0
-    LockedImage: {fileID: 0}
-    UnlockedImage: {fileID: 0}
+    LockedImage: {fileID: 7085217445589072389, guid: 053a937f4ab7a9044bd955475aec21b6,
+      type: 3}
+    UnlockedImage: {fileID: 5603599811544254620, guid: 040953dec8ecdec4bb634896003be9b6,
+      type: 3}
     UnlockedSound: {fileID: 0}
     ProgressTarget: 0
     ProgressCurrent: 0
@@ -57,8 +63,10 @@ MonoBehaviour:
     Title: Ahorrador
     Description: Recoge todas las monedas de una zona
     Points: 0
-    LockedImage: {fileID: 0}
-    UnlockedImage: {fileID: 0}
+    LockedImage: {fileID: 7085217445589072389, guid: 053a937f4ab7a9044bd955475aec21b6,
+      type: 3}
+    UnlockedImage: {fileID: 2910629554478709904, guid: 90578b04b60756c4d9f364fe8961fe95,
+      type: 3}
     UnlockedSound: {fileID: 0}
     ProgressTarget: 0
     ProgressCurrent: 0
@@ -69,8 +77,10 @@ MonoBehaviour:
     Title: Ingeniero improvisado
     Description: "Usa un bloque para acceder a un \xE1rea secreta"
     Points: 0
-    LockedImage: {fileID: 0}
-    UnlockedImage: {fileID: 0}
+    LockedImage: {fileID: 7085217445589072389, guid: 053a937f4ab7a9044bd955475aec21b6,
+      type: 3}
+    UnlockedImage: {fileID: 1084419453687213778, guid: ec44f89834a0bcc4bab335757a9658e7,
+      type: 3}
     UnlockedSound: {fileID: 0}
     ProgressTarget: 0
     ProgressCurrent: 0
@@ -81,8 +91,10 @@ MonoBehaviour:
     Title: Intocable
     Description: "Completa una zona sin recibir da\xF1o"
     Points: 0
-    LockedImage: {fileID: 0}
-    UnlockedImage: {fileID: 0}
+    LockedImage: {fileID: 7085217445589072389, guid: 053a937f4ab7a9044bd955475aec21b6,
+      type: 3}
+    UnlockedImage: {fileID: 4805721323075503272, guid: a7fb84b857f71d64abd7c4a47846fd97,
+      type: 3}
     UnlockedSound: {fileID: 0}
     ProgressTarget: 0
     ProgressCurrent: 0
@@ -93,8 +105,10 @@ MonoBehaviour:
     Title: Chatarra viviente
     Description: "Derrota un Centinela Corro\xEDdo"
     Points: 0
-    LockedImage: {fileID: 0}
-    UnlockedImage: {fileID: 0}
+    LockedImage: {fileID: 7085217445589072389, guid: 053a937f4ab7a9044bd955475aec21b6,
+      type: 3}
+    UnlockedImage: {fileID: -2170470646401462732, guid: 5e9826defa1ed5842a207d1da8c0700b,
+      type: 3}
     UnlockedSound: {fileID: 0}
     ProgressTarget: 0
     ProgressCurrent: 0
@@ -105,8 +119,10 @@ MonoBehaviour:
     Title: Wubba Lubba Dub Dub!
     Description: 'Muere a manos de un espectro reactor '
     Points: 0
-    LockedImage: {fileID: 0}
-    UnlockedImage: {fileID: 0}
+    LockedImage: {fileID: 7085217445589072389, guid: 053a937f4ab7a9044bd955475aec21b6,
+      type: 3}
+    UnlockedImage: {fileID: 4294077603872967674, guid: 671eb5a0024d88a499f32ca21ad61ed4,
+      type: 3}
     UnlockedSound: {fileID: 0}
     ProgressTarget: 0
     ProgressCurrent: 0

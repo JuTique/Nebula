@@ -118,6 +118,12 @@ namespace MoreMountains.CorgiEngine
 				return;
 			}
 
+			if (TargetHandleWeapon == null)
+			{
+				Debug.LogWarning("AIActionShoot: TargetHandleWeapon is null on " + gameObject.name + " - can't aim.");
+				return;
+			}
+
 			if (TargetHandleWeapon.CurrentWeapon != null)
 			{
 				if (_weaponAim == null)
@@ -147,6 +153,16 @@ namespace MoreMountains.CorgiEngine
 		{
 			if (_numberOfShoots < 1)
 			{
+				if (TargetHandleWeapon == null)
+				{
+					Debug.LogWarning("AIActionShoot: TargetHandleWeapon is null on " + gameObject.name + " - can't shoot.");
+					return;
+				}
+				if (TargetHandleWeapon.CurrentWeapon == null)
+				{
+					Debug.LogWarning("AIActionShoot: No CurrentWeapon on " + gameObject.name + " - can't shoot.");
+					return;
+				}
 				TargetHandleWeapon.ShootStart();
 				_numberOfShoots++;
 			}
@@ -160,8 +176,27 @@ namespace MoreMountains.CorgiEngine
 			base.OnEnterState();
 			_numberOfShoots = 0;
 			_shooting = true;
-			_weaponAim = TargetHandleWeapon.CurrentWeapon.gameObject.MMGetComponentNoAlloc<WeaponAim>();
-			_projectileWeapon = TargetHandleWeapon.CurrentWeapon.gameObject.MMGetComponentNoAlloc<ProjectileWeapon>();
+			// Ensure TargetHandleWeapon is initialized (defensive)
+			if (TargetHandleWeapon == null)
+			{
+				Initialization();
+			}
+
+			if (TargetHandleWeapon == null)
+			{
+				Debug.LogWarning("AIActionShoot: TargetHandleWeapon still null on OnEnterState for " + gameObject.name);
+				return;
+			}
+
+			if (TargetHandleWeapon.CurrentWeapon != null)
+			{
+				_weaponAim = TargetHandleWeapon.CurrentWeapon.gameObject.MMGetComponentNoAlloc<WeaponAim>();
+				_projectileWeapon = TargetHandleWeapon.CurrentWeapon.gameObject.MMGetComponentNoAlloc<ProjectileWeapon>();
+			}
+			else
+			{
+				Debug.LogWarning("AIActionShoot: CurrentWeapon is null on OnEnterState for " + gameObject.name);
+			}
 		}
 
 		/// <summary>
@@ -170,7 +205,10 @@ namespace MoreMountains.CorgiEngine
 		public override void OnExitState()
 		{
 			base.OnExitState();
-			TargetHandleWeapon?.ForceStop();
+			if (TargetHandleWeapon != null)
+			{
+				TargetHandleWeapon.ForceStop();
+			}
 			_shooting = false;
 		}
 	}

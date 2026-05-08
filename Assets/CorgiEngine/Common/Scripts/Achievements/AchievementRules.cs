@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using MoreMountains.Tools;
+using UnityEngine.SceneManagement;
 
 namespace MoreMountains.CorgiEngine
 {
@@ -15,25 +16,68 @@ namespace MoreMountains.CorgiEngine
 		MMEventListener<CorgiEngineEvent>,
 		MMEventListener<MMStateChangeEvent<CharacterStates.MovementStates>>,
 		MMEventListener<MMStateChangeEvent<CharacterStates.CharacterConditions>>,
-		MMEventListener<PickableItemEvent>
+		MMEventListener<PickableItemEvent>,
+		MMEventListener<MMSceneLoadingManager.LoadingSceneEvent>
 	{
+		protected static AchievementRules _instance;
+
+		/// <summary>
+		/// Ensures an AchievementRules instance exists early in the app lifecycle.
+		/// </summary>
+		[RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
+		protected static void InitializeInstance()
+		{
+			if (FindObjectOfType<AchievementRules>() == null)
+			{
+				GameObject go = new GameObject("AchievementRules");
+				go.AddComponent<AchievementRules>();
+				DontDestroyOnLoad(go);
+				Debug.Log("[AchievementRules] Auto-created AchievementRules instance before scene load.");
+			}
+		}
+
+		protected int _coinsInCurrentLevel;
+		protected int _coinsCollectedInCurrentLevel;
+		protected bool _ahorradorUnlockedThisLevel;
+		protected bool _atrapadoUnlocked;
+
+		protected virtual void InitializeLevelCoinState()
+		{
+			_coinsInCurrentLevel = 0;
+			_coinsCollectedInCurrentLevel = 0;
+			_ahorradorUnlockedThisLevel = false;
+
+			Coin[] coins = FindObjectsByType<Coin>(FindObjectsSortMode.None);
+			_coinsInCurrentLevel = (coins != null) ? coins.Length : 0;
+		}
+
+		/// <summary>
+		/// Unlocks an achievement and ensures it's saved and the UI refreshed.
+		/// </summary>
+		protected virtual void UnlockAndRefresh(string achievementID)
+		{
+			MMAchievementManager.UnlockAchievement(achievementID);
+			MMAchievementManager.SaveAchievements();
+			MMAchievementManager.LoadSavedAchievements();
+			MMAchievementManager.LoadAchievementList(MMAchievementList.Any);
+			MMAchievementManager.LoadSavedAchievements();
+			MMAchievementManager.LoadAchievementList(MMAchievementList.Any);
+			Debug.Log($"[AchievementRules] Called UnlockAndRefresh for {achievementID}");
+			MMAchievementManager.LoadSavedAchievements();
+			// print status for debugging
+			if (this.PrintCurrentStatusBtn)
+			{
+				PrintCurrentStatus();
+			}
+		}
+
 		/// <summary>
 		/// When we catch an MMGameEvent, we do stuff based on its name
 		/// </summary>
 		/// <param name="gameEvent">Game event.</param>
 		public override void OnMMEvent(MMGameEvent gameEvent)
 		{
-
 			base.OnMMEvent (gameEvent);
-
-			// example: unlock a "start the adventure" achievement on GameStart
-			if (!string.IsNullOrEmpty(gameEvent.EventName))
-			{
-				if (gameEvent.EventName == "GameStart")
-				{
-					MMAchievementManager.UnlockAchievement("Atrapado_en_Titán");
-				}
-			}
 
 		}
 
@@ -41,12 +85,23 @@ namespace MoreMountains.CorgiEngine
 		{
 			if (characterEvent.TargetCharacter.CharacterType == Character.CharacterTypes.Player)
 			{
+				// unlock Atrapadoen_Titán when the player starts moving in Nivel1
+				if (!_atrapadoUnlocked && SceneManager.GetActiveScene().name == "Nivel1")
+				{
+					if (characterEvent.EventType == MMCharacterEventTypes.Run && characterEvent.Moment == MMCharacterEvent.Moments.Start)
+					{
+						Debug.Log("[AchievementRules] Player started running in Nivel1 — unlocking Atrapadoen_Titán");
+						UnlockAndRefresh("Atrapadoen_Titán");
+						_atrapadoUnlocked = true;
+					}
+				}
+				// existing example: track jumps
 				switch (characterEvent.EventType)
 				{
 					case MMCharacterEventTypes.Jump:
 						MMAchievementManager.AddProgress ("JumpAround", 1);
 						break;
-				}	
+				}
 			}
 		}
 
@@ -54,11 +109,14 @@ namespace MoreMountains.CorgiEngine
 		{
 			switch (corgiEngineEvent.EventType)
 			{
+				case CorgiEngineEventTypes.LevelStart:
+					InitializeLevelCoinState();
+					break;
 				case CorgiEngineEventTypes.LevelEnd:
-					MMAchievementManager.UnlockAchievement ("PrincessInAnotherCastle");
+					UnlockAndRefresh("PrincessInAnotherCastle");
 					break;
 				case CorgiEngineEventTypes.PlayerDeath:
-					MMAchievementManager.UnlockAchievement ("DeathIsOnlyTheBeginning");
+					UnlockAndRefresh("DeathIsOnlyTheBeginning");
 					break;
 			}
 		}
@@ -69,12 +127,36 @@ namespace MoreMountains.CorgiEngine
 			{
 				if (pickableItemEvent.PickedItem.GetComponent<Coin>() != null)
 				{
-					// coin pickups -> progress towards "Ahorrador"
-					MMAchievementManager.AddProgress ("Ahorrador", 1);
+					if (!_ahorradorUnlockedThisLevel)
+					{
+						_coinsCollectedInCurrentLevel++;
+						if ((_coinsInCurrentLevel > 0) && (_coinsCollectedInCurrentLevel >= _coinsInCurrentLevel))
+						{
+							_ahorradorUnlockedThisLevel = true;
+							UnlockAndRefresh("Ahorrador");
+						}
+					}
 				}
 				if (pickableItemEvent.PickedItem.GetComponent<Stimpack>() != null)
 				{
-					MMAchievementManager.UnlockAchievement ("Medic");
+					UnlockAndRefresh("Medic");
+				}
+			}
+		}
+
+		/// <summary>
+		/// When a scene starts loading via MMSceneLoadingManager, unlock specific achievements.
+		/// </summary>
+		/// <param name="loadingEvent"></param>
+		public virtual void OnMMEvent(MMSceneLoadingManager.LoadingSceneEvent loadingEvent)
+		{
+			Debug.Log($"[AchievementRules] Received LoadingSceneEvent: SceneName={loadingEvent.SceneName}, Status={loadingEvent.Status}");
+			if (!string.IsNullOrEmpty(loadingEvent.SceneName))
+			{
+				if ((loadingEvent.SceneName == "Nivel1") && (loadingEvent.Status == MMSceneLoadingManager.LoadingStatus.LoadStarted))
+				{
+					Debug.Log("[AchievementRules] Unlocking Atrapadoen_Titán on LoadingSceneEvent.LoadStarted for Nivel1");
+						UnlockAndRefresh("Atrapadoen_Titán");
 				}
 			}
 		}
@@ -85,7 +167,7 @@ namespace MoreMountains.CorgiEngine
 		/// </summary>
 		public virtual void RegisterEnemyKill(string enemyType)
 		{
-			// example mapping: if enemyType == "Nebular" add progress to Cazador_nebular
+			
 			if (enemyType == "Nebular")
 			{
 				MMAchievementManager.AddProgress("Cazador_nebular", 1);
@@ -97,7 +179,7 @@ namespace MoreMountains.CorgiEngine
 		/// </summary>
 		public virtual void RegisterSecretAreaAccess()
 		{
-			MMAchievementManager.UnlockAchievement("Ingeniero_improvisado");
+			UnlockAndRefresh("Ingeniero_improvisado");
 		}
 
 		/// <summary>
@@ -107,11 +189,11 @@ namespace MoreMountains.CorgiEngine
 		{
 			if (bossId == "CentinelaCorroido")
 			{
-				MMAchievementManager.UnlockAchievement("Chatarra_viviente");
+				UnlockAndRefresh("Chatarra_viviente");
 			}
 			if (bossId == "EspectroReactor")
 			{
-				MMAchievementManager.UnlockAchievement("Wubba_Lubba_Dub_Dub");
+				UnlockAndRefresh("Wubba_Lubba_Dub_Dub");
 			}
 		}
 
@@ -142,6 +224,17 @@ namespace MoreMountains.CorgiEngine
 			this.MMEventStartListening<MMStateChangeEvent<CharacterStates.MovementStates>>();
 			this.MMEventStartListening<MMStateChangeEvent<CharacterStates.CharacterConditions>>();
 			this.MMEventStartListening<PickableItemEvent>();
+			this.MMEventStartListening<MMSceneLoadingManager.LoadingSceneEvent>();
+
+			// also listen to Unity sceneLoaded to catch cases where AchievementRules
+			// wasn't present when the MMSceneLoadingManager.LoadingSceneEvent fired
+			SceneManager.sceneLoaded += OnSceneLoaded;
+
+			// if we're already in Nivel1 when enabled, unlock immediately
+			if (SceneManager.GetActiveScene().name == "Nivel1")
+			{
+				UnlockAndRefresh("Atrapadoen_Titán");
+			}
 		}
 
 		/// <summary>
@@ -155,6 +248,22 @@ namespace MoreMountains.CorgiEngine
 			this.MMEventStopListening<MMStateChangeEvent<CharacterStates.MovementStates>>();
 			this.MMEventStopListening<MMStateChangeEvent<CharacterStates.CharacterConditions>>();
 			this.MMEventStopListening<PickableItemEvent>();
+			this.MMEventStopListening<MMSceneLoadingManager.LoadingSceneEvent>();
+
+			SceneManager.sceneLoaded -= OnSceneLoaded;
+		}
+
+		/// <summary>
+		/// Unity sceneLoaded callback: unlock when Nivel1 finishes loading
+		/// </summary>
+		protected virtual void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+		{
+			Debug.Log($"[AchievementRules] OnSceneLoaded: {scene.name}");
+			if (scene.name == "Nivel1")
+			{
+				Debug.Log("[AchievementRules] Unlocking Atrapadoen_Titán on SceneManager.sceneLoaded for Nivel1");
+				UnlockAndRefresh("Atrapadoen_Titán");
+			}
 		}
 	}
 }
