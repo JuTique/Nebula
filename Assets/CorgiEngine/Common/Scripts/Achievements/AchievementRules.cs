@@ -26,6 +26,15 @@ namespace MoreMountains.CorgiEngine
 
 			base.OnMMEvent (gameEvent);
 
+			// example: unlock a "start the adventure" achievement on GameStart
+			if (!string.IsNullOrEmpty(gameEvent.EventName))
+			{
+				if (gameEvent.EventName == "GameStart")
+				{
+					MMAchievementManager.UnlockAchievement("Atrapado_en_Titán");
+				}
+			}
+
 		}
 
 		public virtual void OnMMEvent(MMCharacterEvent characterEvent)
@@ -60,12 +69,49 @@ namespace MoreMountains.CorgiEngine
 			{
 				if (pickableItemEvent.PickedItem.GetComponent<Coin>() != null)
 				{
-					MMAchievementManager.AddProgress ("MoneyMoneyMoney", 1);
+					// coin pickups -> progress towards "Ahorrador"
+					MMAchievementManager.AddProgress ("Ahorrador", 1);
 				}
 				if (pickableItemEvent.PickedItem.GetComponent<Stimpack>() != null)
 				{
 					MMAchievementManager.UnlockAchievement ("Medic");
 				}
+			}
+		}
+
+		/// <summary>
+		/// Helper stub: call this from enemy death logic when an enemy of a given type is killed.
+		/// Example: EnemyHealth.OnDeath() -> AchievementRules.Instance.RegisterEnemyKill("Nebular");
+		/// </summary>
+		public virtual void RegisterEnemyKill(string enemyType)
+		{
+			// example mapping: if enemyType == "Nebular" add progress to Cazador_nebular
+			if (enemyType == "Nebular")
+			{
+				MMAchievementManager.AddProgress("Cazador_nebular", 1);
+			}
+		}
+
+		/// <summary>
+		/// Helper stub: call this when the player uses a block to access a secret area.
+		/// </summary>
+		public virtual void RegisterSecretAreaAccess()
+		{
+			MMAchievementManager.UnlockAchievement("Ingeniero_improvisado");
+		}
+
+		/// <summary>
+		/// Helper stub: call this when a boss dies. Use bossId to map to achievements.
+		/// </summary>
+		public virtual void RegisterBossDeath(string bossId)
+		{
+			if (bossId == "CentinelaCorroido")
+			{
+				MMAchievementManager.UnlockAchievement("Chatarra_viviente");
+			}
+			if (bossId == "EspectroReactor")
+			{
+				MMAchievementManager.UnlockAchievement("Wubba_Lubba_Dub_Dub");
 			}
 		}
 
