@@ -40,6 +40,7 @@ namespace MoreMountains.CorgiEngine
 		protected int _coinsCollectedInCurrentLevel;
 		protected bool _ahorradorUnlockedThisLevel;
 		protected bool _atrapadoUnlocked;
+		protected bool _atrapadoUnlockQueued;
 
 		protected virtual void InitializeLevelCoinState()
 		{
@@ -230,10 +231,10 @@ namespace MoreMountains.CorgiEngine
 			// wasn't present when the MMSceneLoadingManager.LoadingSceneEvent fired
 			SceneManager.sceneLoaded += OnSceneLoaded;
 
-			// if we're already in Nivel1 when enabled, unlock immediately
+			// if we're already in Nivel1 when enabled, queue the unlock so UI listeners can subscribe first
 			if (SceneManager.GetActiveScene().name == "Nivel1")
 			{
-				UnlockAndRefresh("Atrapadoen_Titán");
+				RequestAtrapadoUnlock();
 			}
 		}
 
@@ -261,9 +262,34 @@ namespace MoreMountains.CorgiEngine
 			Debug.Log($"[AchievementRules] OnSceneLoaded: {scene.name}");
 			if (scene.name == "Nivel1")
 			{
-				Debug.Log("[AchievementRules] Unlocking Atrapadoen_Titán on SceneManager.sceneLoaded for Nivel1");
-				UnlockAndRefresh("Atrapadoen_Titán");
+				Debug.Log("[AchievementRules] Queueing Atrapadoen_Titán on SceneManager.sceneLoaded for Nivel1");
+				RequestAtrapadoUnlock();
 			}
+		}
+
+		protected virtual void RequestAtrapadoUnlock()
+		{
+			if (_atrapadoUnlocked || _atrapadoUnlockQueued)
+			{
+				return;
+			}
+
+			_atrapadoUnlockQueued = true;
+			StartCoroutine(UnlockAtrapadoAfterDelay());
+		}
+
+		protected virtual IEnumerator UnlockAtrapadoAfterDelay()
+		{
+			yield return null;
+
+			if (!_atrapadoUnlocked)
+			{
+				Debug.Log("[AchievementRules] Unlocking Atrapadoen_Titán after one frame delay for Nivel1");
+				UnlockAndRefresh("Atrapadoen_Titán");
+				_atrapadoUnlocked = true;
+			}
+
+			_atrapadoUnlockQueued = false;
 		}
 	}
 }
