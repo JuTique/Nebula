@@ -577,7 +577,7 @@ MonoBehaviour:
     m_Center: {x: 46.6, y: 23, z: 0}
     m_Extent: {x: 66.08, y: 28.5, z: 5}
   ConvertToColliderBoundsButton: 0
-  LoadingSceneMode: 1
+  LoadingSceneMode: 0
   LoadingSceneName: LoadingScreen
   AdditiveLoadingSettings:
     LoadingSceneName: MMAdditiveLoadingScreen
@@ -1051,12 +1051,12 @@ PrefabInstance:
     - target: {fileID: 1359180766251103205, guid: 7e50006a34e7f954fb98208f9436e092,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 100.21
+      value: 102
       objectReference: {fileID: 0}
     - target: {fileID: 1359180766251103205, guid: 7e50006a34e7f954fb98208f9436e092,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -3.41
+      value: -3.407
       objectReference: {fileID: 0}
     - target: {fileID: 1359180766251103205, guid: 7e50006a34e7f954fb98208f9436e092,
         type: 3}
@@ -3286,13 +3286,21 @@ PrefabInstance:
       propertyPath: ForcedMode
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 22410768, guid: ace2d4bf56f98df4196ff81845a465d7, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0.00048828125
+      objectReference: {fileID: 0}
+    - target: {fileID: 22425704, guid: ace2d4bf56f98df4196ff81845a465d7, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 153.90002
+      objectReference: {fileID: 0}
     - target: {fileID: 22425704, guid: ace2d4bf56f98df4196ff81845a465d7, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -71.399994
+      value: -71.3999
       objectReference: {fileID: 0}
     - target: {fileID: 22449008, guid: ace2d4bf56f98df4196ff81845a465d7, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -28.000122
+      value: -28
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
