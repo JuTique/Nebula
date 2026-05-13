@@ -2006,6 +2006,71 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: 696533b4d82512f4095ee0e3fa0fddb7,
         type: 2}
+    - target: {fileID: 8479013258759846279, guid: 6059d977d1f210348bfbe1a82f4f9883,
+        type: 3}
+      propertyPath: difficultySettings.Array.data[0].enemyDamage
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8479013258759846279, guid: 6059d977d1f210348bfbe1a82f4f9883,
+        type: 3}
+      propertyPath: difficultySettings.Array.data[1].enemyDamage
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8479013258759846279, guid: 6059d977d1f210348bfbe1a82f4f9883,
+        type: 3}
+      propertyPath: difficultySettings.Array.data[2].enemyDamage
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8479013258759846279, guid: 6059d977d1f210348bfbe1a82f4f9883,
+        type: 3}
+      propertyPath: difficultySettings.Array.data[0].playerHealth
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 8479013258759846279, guid: 6059d977d1f210348bfbe1a82f4f9883,
+        type: 3}
+      propertyPath: difficultySettings.Array.data[1].playerHealth
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 8479013258759846279, guid: 6059d977d1f210348bfbe1a82f4f9883,
+        type: 3}
+      propertyPath: difficultySettings.Array.data[2].playerHealth
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8479013258759846279, guid: 6059d977d1f210348bfbe1a82f4f9883,
+        type: 3}
+      propertyPath: difficultySettings.Array.data[2].timerEnabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8479013258759846279, guid: 6059d977d1f210348bfbe1a82f4f9883,
+        type: 3}
+      propertyPath: difficultySettings.Array.data[0].coinMultiplier
+      value: 2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8479013258759846279, guid: 6059d977d1f210348bfbe1a82f4f9883,
+        type: 3}
+      propertyPath: difficultySettings.Array.data[1].coinMultiplier
+      value: 2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8479013258759846279, guid: 6059d977d1f210348bfbe1a82f4f9883,
+        type: 3}
+      propertyPath: difficultySettings.Array.data[2].coinMultiplier
+      value: 2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8479013258759846279, guid: 6059d977d1f210348bfbe1a82f4f9883,
+        type: 3}
+      propertyPath: difficultySettings.Array.data[2].enemyAggression
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8479013258759846279, guid: 6059d977d1f210348bfbe1a82f4f9883,
+        type: 3}
+      propertyPath: difficultySettings.Array.data[0].invulnerabilityDuration
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8479013258759846279, guid: 6059d977d1f210348bfbe1a82f4f9883,
+        type: 3}
+      propertyPath: difficultySettings.Array.data[1].invulnerabilityDuration
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
