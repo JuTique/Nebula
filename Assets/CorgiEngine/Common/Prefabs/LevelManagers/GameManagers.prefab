@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 11489144}
   - component: {fileID: 114992019002501916}
   - component: {fileID: 114903719044035428}
+  - component: {fileID: 8479013258759846279}
   m_Layer: 0
   m_Name: GameManagers
   m_TagString: Untagged
@@ -89,3 +90,40 @@ MonoBehaviour:
   CurrentTimeScale: 1
   TargetTimeScale: 1
   TestButton: 0
+--- !u!114 &8479013258759846279
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 190956}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a8a63ad07ee6cf40a2aeb8e4716d258, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DifficultyManager
+  difficultySettings:
+  - difficulty: 0
+    playerHealth: 0
+    enemyDamage: 0
+    timerEnabled: 0
+    timerDurationSeconds: 0
+    coinMultiplier: 0
+    invulnerabilityDuration: 0
+    enemyAggression: 0
+  - difficulty: 1
+    playerHealth: 0
+    enemyDamage: 0
+    timerEnabled: 0
+    timerDurationSeconds: 0
+    coinMultiplier: 0
+    invulnerabilityDuration: 0
+    enemyAggression: 0
+  - difficulty: 2
+    playerHealth: 0
+    enemyDamage: 0
+    timerEnabled: 1
+    timerDurationSeconds: 0
+    coinMultiplier: 0
+    invulnerabilityDuration: 0
+    enemyAggression: 0
