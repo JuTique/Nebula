@@ -54,7 +54,7 @@ MonoBehaviour:
   ResetLivesOnGameOver: 1
   ResetPersistentCharacterOnGameOver: 1
   ResetStoredCharacterOnGameOver: 1
-  GameOverScene: RetroAdventureGameOver
+  GameOverScene: Perdio
   DelayBeforeGameOverSceneLoad: 0
   PauseGameWhenInventoryOpens: 1
 --- !u!114 &114992019002501916
@@ -104,26 +104,26 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::DifficultyManager
   difficultySettings:
   - difficulty: 0
-    playerHealth: 0
-    enemyDamage: 0
+    playerHealth: 15
+    enemyDamage: 1
     timerEnabled: 0
     timerDurationSeconds: 0
-    coinMultiplier: 0
-    invulnerabilityDuration: 0
-    enemyAggression: 0
+    coinMultiplier: 2.5
+    invulnerabilityDuration: 2
+    enemyAggression: 2
   - difficulty: 1
-    playerHealth: 0
-    enemyDamage: 0
+    playerHealth: 15
+    enemyDamage: 1
     timerEnabled: 0
     timerDurationSeconds: 0
-    coinMultiplier: 0
-    invulnerabilityDuration: 0
-    enemyAggression: 0
+    coinMultiplier: 2.5
+    invulnerabilityDuration: 1
+    enemyAggression: 4
   - difficulty: 2
-    playerHealth: 0
-    enemyDamage: 0
+    playerHealth: 6
+    enemyDamage: 3
     timerEnabled: 1
     timerDurationSeconds: 0
-    coinMultiplier: 0
+    coinMultiplier: 2.5
     invulnerabilityDuration: 0
-    enemyAggression: 0
+    enemyAggression: 6
